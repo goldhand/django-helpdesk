@@ -141,7 +141,7 @@ class Queue(models.Model):
         )
 
     email_box_user = models.CharField(
-        _('E-Mail Username'),
+        _('E-Mail User'),
         max_length=200,
         blank=True,
         null=True,
@@ -286,7 +286,7 @@ class Ticket(models.Model):
         )
 
     assigned_to = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='assigned_to',
         blank=True,
         null=True,
@@ -517,7 +517,7 @@ class FollowUp(models.Model):
         )
 
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         blank=True,
         null=True,
         verbose_name=_('User'),
@@ -894,7 +894,7 @@ class SavedSearch(models.Model):
          etc...
     """
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         verbose_name=_('User'),
         )
 
@@ -931,7 +931,7 @@ class UserSettings(models.Model):
     We should always refer to user.usersettings.settings['setting_name'].
     """
 
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
 
     settings_pickled = models.TextField(
         _('Settings Dictionary'),
@@ -1084,7 +1084,7 @@ class TicketCC(models.Model):
         )
 
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         blank=True,
         null=True,
         help_text=_('User who wishes to receive updates for this ticket.'),
